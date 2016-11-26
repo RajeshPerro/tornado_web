@@ -1,0 +1,7 @@
+hello hey
+hello hey
+hello hey
+what are you doing....
+I am Rajesh
+
+Put is perfectly working and it's writing in existing file.. :) I am quite happy.
