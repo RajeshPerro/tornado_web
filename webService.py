@@ -8,7 +8,6 @@ class MainHandler(tornado.web.RequestHandler):
 
 	def put(self, *args, **kwargs):
 		self.write(self.request.body)
-		self.write("\nPUT is working..")
 		my_file = os.path.exists("write_file.txt")
 		if my_file:
 			print "<<<<<<-----File already exists------>>>>>>"
@@ -16,12 +15,15 @@ class MainHandler(tornado.web.RequestHandler):
 			text_file.write(self.request.body)
 			text_file.write("\n")
 			text_file.close()
+			self.write("\nFile already exists and PUT is working..")
 		else:	
 			print "<<<<----Creating new file to write---->>>>"
 			text_file = open("write_file.txt", "w")
 			text_file.write(self.request.body)
 			text_file.write("\n")
 			text_file.close()
+			self.write("\n")
+			self.write("New file Created and PUT is working..")
 	
 
 
