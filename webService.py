@@ -22,6 +22,10 @@ class MainHandler(tornado.web.RequestHandler):
 			text_file.write(self.request.body)
 			text_file.write("\n")
 			text_file.close()
+	
+
+
+					
 	            
 class FileHandler(tornado.web.RequestHandler):
 	def get(self):
@@ -39,14 +43,33 @@ class FileHandler(tornado.web.RequestHandler):
 				self.write(line)
 			text_file.close()
 		else:
-			print "<<<<<<-----There are no files send a PUT request for creating a new file------>>>>>>"
+			print "<<<<<<-----File not Found------>>>>>>"
 			def prepare(self):
 				raise tornado.web.HTTPError(404)
         		self.set_status(404)
         		self.write("404 FILE NOT FOUND")
         		self.write("<br>")
-        		self.write("Run a PUT request for creating a new file ")
-			
+        		self.write("There are no files send a PUT/POST request for creating a new file")
+   	
+   	def post(self, *args, **kwargs):
+   		my_file_read =  os.path.exists("write_files.txt")
+   		if my_file_read:
+			self.write("POST is working..")
+			print "<<<<<-----File exists----->>>>>"
+			text_file = open("write_file.txt", "w")
+			text_file.write(self.request.body)
+			text_file.write("\n")
+			text_file.close()
+			print "<<<<----Old data replaced in File---->>>>"
+		else:
+			print "<<<<<<---File not Found-------->>>>>>"
+			def prepare(self):
+				raise tornado.web.HTTPError(404)
+        		self.set_status(404)
+        		self.write("404 FILE NOT FOUND")
+        		self.write("<br>")
+        		self.write("There are no files send a PUT/POST request for creating a new file ")
+				
             
 
 
