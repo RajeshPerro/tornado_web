@@ -49,10 +49,11 @@ class FileHandler(tornado.web.RequestHandler):
         		self.set_status(404)
         		self.write("404 FILE NOT FOUND")
         		self.write("<br>")
-        		self.write("There are no files send a PUT/POST request for creating a new file")
+        		self.write("There are no files send a PUT request for creating a new file")
    	
    	def post(self, *args, **kwargs):
-   		my_file_read =  os.path.exists("write_files.txt")
+   		#just have to change the file name..
+   		my_file_read =  os.path.exists("write_file.txt")
    		if my_file_read:
 			self.write("POST is working..")
 			print "<<<<<-----File exists----->>>>>"
@@ -68,8 +69,12 @@ class FileHandler(tornado.web.RequestHandler):
         		self.set_status(404)
         		self.write("404 FILE NOT FOUND")
         		self.write("<br>")
-        		self.write("There are no files send a PUT/POST request for creating a new file ")
-				
+        		self.write("There are no files send a PUT request for creating a new file ")
+	
+	def delete(self, *args, **kwargs):
+		os.remove("write_file.txt")
+		print "<<<<<----file deleted---->>>>>"
+		self.write("File Deleted")				
             
 
 
